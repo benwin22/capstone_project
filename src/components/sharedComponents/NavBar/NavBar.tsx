@@ -2,7 +2,7 @@ import * as _React from 'react';
 import { useState } from 'react'; //useState is a React Hook
 import {
     Button,
-    Drawer, 
+    // Drawer, 
     ListItemButton,
     List,
     ListItemText,
@@ -12,7 +12,7 @@ import {
     Stack, 
     Typography,
     Divider, 
-    CssBaseline,
+    // CssBaseline,
     Box 
 } from '@mui/material'; 
 import { useNavigate } from 'react-router-dom'; 
@@ -20,7 +20,9 @@ import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';;
 import PetsIcon from '@mui/icons-material/Pets';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
-import { signOut, getAuth } from 'firebase/auth'; 
+import { signOut, getAuth } from 'firebase/auth';
+import animalBackground from "../../../assets/images/animals2.png"
+ 
 
 
 
@@ -29,79 +31,60 @@ import { theme } from '../../../Theme/themes';
 
 
 // building a CSS object/dictionary to reference inside our html for styling
-const drawerWidth = 200; 
+// const drawerWidth = 200; 
 
 
 const navStyles = {
     appBar: {
+        backgroundImage: `url(${animalBackground})`,
+       
+        marginTop: '0px',
+        marginLeft: '50%',
+        height: "50%",
+        width: "100%",
+        backgroundSize: "100%",
+        backgroundOrigin: 'content-box',
+        backgroundRepeat: "no-repeat",
+    
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp, //number 
             duration: theme.transitions.duration.leavingScreen //string calculation of the duration
         })
     },
-    appBarShift: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut, //number 
-            duration: theme.transitions.duration.enteringScreen //string calculation of the duration
-        })
-    },
     menuButton: {
-        marginRight: theme.spacing(2) //default to 8px * 2 = 16px
+        marginRight: theme.spacing(2), //default to 8px * 2 = 16px
+        color: theme.transitions.duration.leavingScreen
     },
-    hide: {
-        display: 'none'
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0
-    },
-    drawerPaper: {
-        width: drawerWidth
-    },
-    drawerHeader: {
-        display: 'flex',
-        width: drawerWidth,
-        alignItems: 'center',
-        padding: theme.spacing(1),
-        // using the spread operator ... to grab all the properties from the default toolbar in theme
-        ...theme.mixins.toolbar, 
-        justifyContent: 'flex-end'
-    },
-    toolbar: {
-        display: 'flex'
-    },
-    toolbarButton: {
-        marginLeft: 'auto',
-        color: theme.palette.primary.contrastText
-    },
+  
+    // toolbar: {
+    //     display: 'flex'
+    // },
+    // toolbarButton: {
+    //     marginLeft: 'auto',
+    //     color: theme.palette.primary.contrastText
+    // },
     signInStack: {
         position: 'absolute',
-        top: '20%',
+        top: '5%',
         right: '50px'
     }
 }
 
 export const NavBar = () => {
-    // setup all your hooks & variables
-    const [ open, setOpen ] = useState(false) //setting initial state to false as in NOT open
+    const [ _open, setOpen ] = useState(false) 
     const navigate = useNavigate(); 
-    // grabbing our auth boolean whether or not someone is signed in
     const myAuth = localStorage.getItem('auth')
     const auth = getAuth(); 
 
-
-    // 2 functions to help us set our hook
-    const handleDrawerOpen = () => {
+    const linkOpen = () => {
         setOpen(true)
     }
 
-    const handleDrawerClose = () => {
+    const linkClose = () => {
         setOpen(false)
     }
 
-    // list of dictionary/object for our NavLinks
+ 
 
     const navLinks = [
         {
@@ -137,26 +120,51 @@ export const NavBar = () => {
             localStorage.setItem('uuid', '')
             navigate('/')
         }
-    }
+    };
 
     return (
         <Box sx={{display: 'flex'}}>
-            <CssBaseline />
-            <AppBar 
-                sx={ open ? navStyles.appBarShift : navStyles.appBar }
+            {/* <CssBaseline /> */}
+            <AppBar
+                sx={ navStyles.appBar }
                 position = 'fixed'
-            >
-                <Toolbar sx={ navStyles.toolbar }>
+                >
+                <Toolbar>
+                    
                     <IconButton 
                         color='inherit'
-                        aria-label='open drawer'
-                        onClick = { handleDrawerOpen }
+                        // aria-label='open drawer'
+                        onClick = { ()=>{navigate('/')}}
                         edge='start'
-                        sx = { open ? navStyles.hide : navStyles.menuButton }
+                        sx = {navStyles.menuButton }
                     >
+                        <Typography>Home</Typography>
                         <PetsIcon />
+                           
+                    </IconButton>
+                    
+                    <IconButton 
+                        color='inherit'
+                        // aria-label='open drawer'
+                        onClick = { ()=>{navigate('/search')}}
+                        edge='start'
+                        sx = {navStyles.menuButton }
+                    >
+                        <Typography>Search</Typography>
+                        <SearchIcon />                       
+                    </IconButton>
+                    <IconButton 
+                        color='inherit'
+                        // aria-label='open drawer'
+                        onClick = { ()=>{navigate('/saved')}}
+                        edge='start'
+                        sx = {navStyles.menuButton }
+                    >
+                        <Typography>Saved</Typography>
+                        <CollectionsBookmarkIcon />                       
                     </IconButton>
                 </Toolbar>
+               
                 <Stack 
                     direction='row' 
                     justifyContent='space-between' 
@@ -174,39 +182,22 @@ export const NavBar = () => {
                         >
                             { signInText }
                         </Button>
-                    </Stack>
+                </Stack>
             </AppBar>
-            <Drawer
-                sx={ open ? navStyles.drawer : navStyles.hide }
-                variant = 'persistent'
-                anchor = 'left' 
-                open = {open} //either true or false 
-            >
-                <Box sx = {navStyles.drawerHeader }>
-                    <IconButton onClick={handleDrawerClose}>
-                        <PetsIcon />
-                    </IconButton>
-                </Box>
-                <Divider />
+       
+           
+            {/* <Divider />
                 <List>
-                    { navLinks.map( (item) => {
-                        // using variable deconstruction to deconstruct our object/dictionary
-                        const { text, icon, onClick } = item; 
+                    {navLinks.map((item) => {
+                        const { text, icon, onClick } = item;
                         return (
                             <ListItemButton key={text} onClick={onClick}>
                                 <ListItemText primary={text} />
-                                { icon }
+                                {icon}
                             </ListItemButton>
                         )
-
                     })}
-                </List>
-            </Drawer>
-        </Box>
+                </List> */}
+        </Box >
     )
-
-
-
-
-
-}
+};

@@ -4,7 +4,8 @@ import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom'; 
 
 
-import searchImage from '../../assets/images/animals2.png'; 
+import searchBackgroundImage from '../../assets/images/animals.jpg'; 
+import { NavBar, InputText } from '../sharedComponents';
 
 interface Props {
     title: string
@@ -17,14 +18,14 @@ const Root = styled('div')({
 })
 
 const Main = styled('main')({
-    backgroundImage: `url(${searchImage});`,
+    backgroundImage: `url(${searchBackgroundImage});`,
     width: '100%',
     height: '100%',
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center top 5px', 
     position: 'absolute',
-    marginTop: '10px',
+    marginTop: '400px',
     color: '#02C5CF'
 })
 
@@ -44,6 +45,7 @@ export const Home = (props: Props) => {
     // return is always HTML & it can have ONLY 1 parent div 
     return (
         <Root>
+             <NavBar />
             <Main>
                 <MainText>
                     <Typography variant='h1'> { props.title }</Typography>

@@ -75,25 +75,25 @@ export const Saved = () => {
     },[]);
 
   
-    const updateQuantity = async (id: string, operation: string) => {
+    // const updateSaved = async (id: string, operation: string) => {
 
-        // findIndex method to find the index of a value based on a conditional
-        const dataIndex: number = currentSaved?.findIndex((saved) => saved.id === id) as number//stores the index of the item it finds
-        console.log(dataIndex)
-        if (currentSaved) console.log(currentSaved[dataIndex as number])
+    //     // findIndex method to find the index of a value based on a conditional
+    //     const dataIndex: number = currentSaved?.findIndex((saved) => saved.id === id) as number//stores the index of the item it finds
+    //     console.log(dataIndex)
+    //     if (currentSaved) console.log(currentSaved[dataIndex as number])
 
 
         
-        const updatedSaved = [...currentSaved as SearchProps[]]
-        console.log(updatedSaved)
-        if (operation == 'dec'){
-            updatedSaved[dataIndex].quantity -= 1
-        } else {
-            updatedSaved[dataIndex].quantity += 1
-        }
+    //     const updatedSaved = [...currentSaved as SearchProps[]]
+    //     console.log(updatedSaved)
+    //     if (operation == 'dec'){
+    //         updatedSaved[dataIndex].quantity -= 1
+    //     } else {
+    //         updatedSaved[dataIndex].quantity += 1
+    //     }
 
-        setCurrentSaved(updatedSaved)
-    }
+    //     setCurrentSaved(updatedSaved)
+    // }
 
    
     const updateSaved = async ( savedItem: SearchProps ) => {
@@ -124,7 +124,7 @@ export const Saved = () => {
     
     const deleteItem = async (savedItem: SearchProps ) => {
 
-        const itemRef = ref(db, `saveds/${userId}/${savedItem.id}`)
+        const itemRef = ref(db, `saved/${userId}/${savedItem.id}`)
 
 
         
@@ -182,7 +182,28 @@ export const Saved = () => {
                                                 <Typography>{saved.name}</Typography>
                                             </AccordionSummary>
                                             <AccordionDetails>
-                                                <Typography>{saved.description}</Typography>
+                                                <Typography>{saved.habitat}</Typography>
+                                            </AccordionDetails>
+                                            <AccordionDetails>
+                                                <Typography>{saved.diet}</Typography>
+                                            </AccordionDetails>
+                                            <AccordionDetails>
+                                                <Typography>{saved.prey}</Typography>
+                                            </AccordionDetails>
+                                            <AccordionDetails>
+                                                <Typography>{saved.name_of_young}</Typography>
+                                            </AccordionDetails>
+                                            <AccordionDetails>
+                                                <Typography>{saved.common_name}</Typography>
+                                            </AccordionDetails>
+                                            <AccordionDetails>
+                                                <Typography>{saved.number_of_species}</Typography>
+                                            </AccordionDetails>
+                                            <AccordionDetails>
+                                                <Typography>{saved.location}</Typography>
+                                            </AccordionDetails>
+                                            <AccordionDetails>
+                                                <Typography>{saved.group}</Typography>
                                             </AccordionDetails>
                                         </Accordion>
                                         <Stack 

@@ -32,8 +32,9 @@ import { getDatabase, ref, push } from 'firebase/database';
 import { NavBar, InputText } from '../sharedComponents';
 import { theme } from '../../Theme/themes';
 import { MessageType } from '../Auth';
-import  searchImage  from '../../assets/images/animals2.png';
+import  searchImage  from '../../assets/images/animals.jpg';
 import { serverCalls } from '../../api';
+// import SearchProps from '../Search';
 // import { searchBar } from '../sharedComponents';
 
 
@@ -71,7 +72,7 @@ export const searchStyles = {
         backgroundImage: `url(${searchImage});`,
         height: '100%',
         width: '100%',
-        color: '#EAA241',
+        color: 'grey',
         backgroundSize: 'contain',
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -87,14 +88,27 @@ export const searchStyles = {
         width: '70vw'
     },
     card: {
-        width: "300px", 
+        width: "400px", 
         padding: '10px',
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "rgb(207,133,27)",
+        backgroundColor: "rgb(217,156,159)",
         border: '2px solid',
         borderColor: theme.palette.primary.main,
         borderRadius: '10px'
+    },
+    cardInfo: {
+        width: "600px",
+        marginRight: 'auto', 
+        marginLeft: 'auto',
+        padding: '10px',
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "rgb(217,156,159)",
+        border: '2px solid',
+        borderColor: '#02C5CF',
+        borderRadius: '10px',
+        textAlign: 'center'
     },
     cardMedia: {
         width: '95%',
@@ -107,11 +121,12 @@ export const searchStyles = {
     },
     button: {
         borderWidth: "medium",
-        color: '#02C5CF', 
+        color: '#grey', 
         borderRadius: '50px',
         height: '45px',
-        width: '250px',
+        width: '100%',
         marginTop: '10px'
+        
     },
     stack: {
         width: '75%', 
@@ -225,7 +240,7 @@ export const Search = () => {
     // const { searchData } = useGetSearch(); //list of all our data objects 
     const [ animalData, setAnimalData ] = useState<SearchProps[]>([])
     // const [ currentSearch] = useState<SearchProps[]>([]); //one and only one object we will send to our saved 
-    const [ savedOpen, setSavedOpen ] = useState(false); 
+    const [ _savedOpen, setSavedOpen ] = useState(false); 
 
     console.log(animalData)
     const { register, handleSubmit } = useForm<SubmitProps>({})
@@ -253,7 +268,7 @@ export const Search = () => {
             </Typography>
             <form onSubmit = {handleSubmit(onSubmit)}>
                 
-                <Box sx={searchStyles.card}>
+                <Box sx={searchStyles.cardInfo}>
                     
                     <label htmlFor='search'>What Animal?</label>
                     <InputText {...register('search')} name='search' placeholder='search Here' />

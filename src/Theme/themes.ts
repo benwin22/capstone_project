@@ -6,12 +6,7 @@ export const theme = createTheme({
         fontFamily: 'Impact, Haettenschweiler, sans-serif',
         
     },
-    // {
-    //     font-family: "blockhead-dark-side", sans-serif;
-    //     font-weight: 400;
-    //     font-style: normal;
-    // },
-    // KEEP THESE IN MIND WHEN CALLING
+
     palette: {
         primary: {
             main: '#E3ECB6'
