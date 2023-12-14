@@ -23,8 +23,10 @@ import { theme } from '../../Theme/themes';
 import { SearchProps } from '../../customHooks';
 import { searchStyles } from '../Search';
 import { MessageType } from '../Auth'; 
+import { serverCalls } from '../../api/server';
 // import { Collection } from '../Collection';
-// import  serverCalls  from '../../api/server';
+
+
 
 
 
@@ -44,8 +46,8 @@ export const Saved = () => {
     const [ message, setMessage] = useState<string>()
     const [ messageType, setMessageType ] = useState<MessageType>()
     const [ currentSaved, setCurrentSaved ] = useState<SearchProps[]>()
-    const userId = localStorage.getItem('uuid')
-    const savedRef = ref(db, `saved/${userId}/`); 
+    const user = localStorage.getItem('uuid')
+    const savedRef = ref(db, `saved/${user}/`); 
 
 
     useEffect(()=> {
@@ -75,10 +77,10 @@ export const Saved = () => {
     },[]);
 
   
-    // const updateSaved = async (id: string, operation: string) => {
+    // const updateSelect = async (_name: string, operation: string) => {
 
     //     // findIndex method to find the index of a value based on a conditional
-    //     const dataIndex: number = currentSaved?.findIndex((saved) => saved.id === id) as number//stores the index of the item it finds
+    //     const dataIndex: number = currentSaved?.findIndex((saved) => saved.name === _name) as number//stores the index of the item it finds
     //     console.log(dataIndex)
     //     if (currentSaved) console.log(currentSaved[dataIndex as number])
 
@@ -87,9 +89,9 @@ export const Saved = () => {
     //     const updatedSaved = [...currentSaved as SearchProps[]]
     //     console.log(updatedSaved)
     //     if (operation == 'dec'){
-    //         updatedSaved[dataIndex].quantity -= 1
+    //         updatedSaved[dataIndex].select -= 1
     //     } else {
-    //         updatedSaved[dataIndex].quantity += 1
+    //         updatedSaved[dataIndex].select += 1
     //     }
 
     //     setCurrentSaved(updatedSaved)
@@ -98,12 +100,12 @@ export const Saved = () => {
    
     const updateSaved = async ( savedItem: SearchProps ) => {
 
-        const itemRef = ref(db, `saveds/${userId}/${savedItem.id}`)
+        const itemRef = ref(db, `saveds/${user}/${savedItem.id}`)
 
 
         
         update(itemRef, {
-            quantity: savedItem.quantity
+            select: savedItem.select
         })
         .then(() => {
             setMessage('Successfully Updated Your Saved')
@@ -121,10 +123,10 @@ export const Saved = () => {
     }
 
 
-    
+    // I don't have items
     const deleteItem = async (savedItem: SearchProps ) => {
 
-        const itemRef = ref(db, `saved/${userId}/${savedItem.id}`)
+        const itemRef = ref(db, `saved/${user}/${savedItem.id}`)
 
 
         
@@ -143,10 +145,43 @@ export const Saved = () => {
             setOpen(true)
         })
     }
+    // function updateSelect(name: any, arg1: string) {
+    //     throw new Error('Function not implemented.');
+    // }
 
+// not sure I need this code....
+    // const catalog = async () => {
 
-    
+    //     const data: CreateCollectionProps = {
+    //         'collection': currentSaved as SearchProps[]
+    //     }
 
+    //     const response = await serverCalls.createCollection(data)
+
+    //     if (response.status === 200){ //200 is a good status code
+    //         remove(savedRef) //this is removing our whole entire cartRef aka emptying our cart
+    //         .then(() => {
+    //             console.log("Saved cleared successfully")
+    //             setMessage('Successfully compiled')
+    //             setMessageType('success')
+    //             setOpen(true)
+    //             setTimeout(()=>{window.location.reload()}, 2000)
+    //         })
+    //         .catch((error) => {
+    //             console.log("Error clearing Saved: " + error.message)
+    //             setMessage(error.message)
+    //             setMessageType('error')
+    //             setOpen(true)
+    //             setTimeout(()=>{window.location.reload()}, 2000)
+    //         })
+    //     } else {
+    //         setMessage('Error with your Saved')
+    //         setMessageType('error')
+    //         setOpen(true)
+    //         setTimeout(()=>{window.location.reload()}, 2000)
+    //     }
+
+    // }
 
 
 
@@ -159,9 +194,9 @@ export const Saved = () => {
                         variant = 'h4'
                         sx = {{ marginRight: '40px'}}
                     >
-                        {/* ${user.uid} ANIMALS */}
+                       Saved Animals
                     </Typography>
-                    {/* <Button color = 'primary' variant = 'contained' onClick={ catalog } >Catalog</Button> */}
+                    {/* <Button color = 'primary' variant = 'contained' onClick={ catalog } >Compile</Button> */}
                 </Stack>
                 <Grid container spacing={3} sx={searchStyles.grid}>
                     {currentSaved?.map((saved: SearchProps, index: number) => (
@@ -178,7 +213,7 @@ export const Saved = () => {
                                         <Accordion sx = {{color: 'white', backgroundColor: theme.palette.secondary.light}}>
                                             <AccordionSummary 
                                                 expandIcon={<InfoIcon sx={{color: theme.palette.primary.main}}/>}
-                                            >
+                                            >@#$%
                                                 <Typography>{saved.name}</Typography>
                                             </AccordionSummary>
                                             <AccordionDetails>
@@ -215,15 +250,15 @@ export const Saved = () => {
                                             <Button 
                                                 size='large'
                                                 variant='text'
-                                                onClick={()=>{updateQuantity(saved.id, 'dec')}}
+                                                onClick={()=>{updateSelect(saved.name, 'dec')}}
                                             >-</Button>
-                                            <Typography variant = 'h6' sx={{color: 'white'}}>
-                                                {saved.quantity}
+                                            <Typography variant = 'h6' sx={{color: 'red'}}>
+                                                {saved.select}
                                             </Typography>
                                             <Button 
                                                 size='large'
                                                 variant='text'
-                                                onClick={()=>{updateQuantity(saved.id, 'inc')}}
+                                                onClick={()=>{updateSelect(saved.name, 'inc')}}
                                             >+</Button>
                                         </Stack>
                                         <Button 
@@ -232,7 +267,7 @@ export const Saved = () => {
                                             sx = {searchStyles.button}
                                             onClick = {()=>{updateSaved(saved)}}
                                         >
-                                            Update Quantity = ${(saved.quantity * parseFloat(saved.price)).toFixed(2)}
+                                            Update Select(Don't need this) = ${(saved.select * parseFloat(saved.name)).toFixed(2)}
                                         </Button>
                                         <Button 
                                             size = 'medium'

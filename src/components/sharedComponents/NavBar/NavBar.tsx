@@ -37,14 +37,15 @@ import { theme } from '../../../Theme/themes';
 const navStyles = {
     appBar: {
         backgroundImage: `url(${animalBackground})`,
-       
         marginTop: '0px',
-        marginLeft: '50%',
-        height: "50%",
+        backgroundPosition: 'center',
+        height: "20%",
         width: "100%",
-        backgroundSize: "100%",
+        position: 'fixed',
+        backgroundSize: "40%",
         backgroundOrigin: 'content-box',
         backgroundRepeat: "no-repeat",
+        backgroundColor: 'white',
     
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp, //number 
@@ -53,7 +54,7 @@ const navStyles = {
     },
     menuButton: {
         marginRight: theme.spacing(2), //default to 8px * 2 = 16px
-        color: theme.transitions.duration.leavingScreen
+        color: 'theme.transitions.duration.leavingScreen'
     },
   
     // toolbar: {

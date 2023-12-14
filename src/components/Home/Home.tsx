@@ -25,7 +25,7 @@ const Main = styled('main')({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center top 5px', 
     position: 'absolute',
-    marginTop: '400px',
+    marginTop: '100px',
     color: '#02C5CF'
 })
 
@@ -35,7 +35,9 @@ const MainText = styled('div')({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    color: '#02C5CF'
+    color: 'green',
+    borderColor: 'black',
+    textShadow: "-1px 1px 0 #000,        1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;" 
 })
 
 
@@ -49,7 +51,7 @@ export const Home = (props: Props) => {
             <Main>
                 <MainText>
                     <Typography variant='h1'> { props.title }</Typography>
-                    <Button sx={{ marginTop: '10px'}} component={Link} to={"/search"} variant='contained'>Let's Explore the Wold of Animals!</Button>
+                    <Button sx={{ marginTop: '400px'}} component={Link} to={"/search"} variant='contained'>Let's Explore the Wold of Animals!</Button>
                 </MainText>
             </Main>
         </Root>

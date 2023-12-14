@@ -1,19 +1,24 @@
 // import * as _React from 'react';
 // import { useState, useEffect } from 'react';
-// import {serverCalls}  from '../api/server';
+// import {serverCalls}  from '../api';
 
-// // internal
-// // import { serverCalls } from '../api';
+
 
 
 
 // export interface SearchProps {
-//     id: string,
-//     name: string,
+//     collection: string;
+//     select: number;
 //     image: string,
-//     description: string,
-//     quantity: number,
-//     price: string,
+//     name: string,
+//     habitat: string,
+//     diet: string,
+//     prey: string,
+//     name_of_young: string,
+//     common_name: string,
+//     number_of_species: string,
+//     location:string,
+//     group: string,
    
 // }
 
@@ -27,7 +32,7 @@
 //     const [ searchData, setSearchData ] = useState<SearchProps[]>([])
 
 //     const handleDataFetch = async () => {
-//         const result = await serverCalls.getSearch()
+//         const result = await serverCalls.getSearch(name)
 
 //         setSearchData(result)
 //     }

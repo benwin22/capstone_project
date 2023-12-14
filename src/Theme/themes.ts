@@ -16,7 +16,7 @@ export const theme = createTheme({
             light: '#A2D176'
         },
         info: {
-            main: '#BEF2E4'
+            main: '#BEF2E9'
         }
     }
 })

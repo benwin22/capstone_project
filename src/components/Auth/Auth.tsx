@@ -35,7 +35,7 @@ const authStyles = {
         backgroundPosition: 'center top 5px', 
         position: 'absolute',
         marginTop: '10px',
-        color: '#EAA241'
+        // color: 'red'
     },
     stack: {
         width: '400px',
@@ -48,7 +48,7 @@ const authStyles = {
         height: '50px',
         width: '175px',
         fontSize: '14px',
-        color: '#EAA241'
+        color: 'red'
         
     }
 }

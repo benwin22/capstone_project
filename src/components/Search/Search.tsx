@@ -25,9 +25,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { getDatabase, ref, push } from 'firebase/database'; 
 // ======================================================
 
-
-
 // internal imports
+// import { useGetSearch, SearchProps } from '../../customHooks';
+
 
 import { NavBar, InputText } from '../sharedComponents';
 import { theme } from '../../Theme/themes';
@@ -38,48 +38,23 @@ import { serverCalls } from '../../api';
 // import { searchBar } from '../sharedComponents';
 
 
-// WANT A SEARCH BAR!!=====================================
-// import TextField from '@mui/material/TextField';
 
-// interface SearchBarProps {
-//   onSearch: (query: string) => void;
-// }
-
-// const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-//   const [searchQuery, setSearchQuery] = useState<string>('');
-
-//   const handleSearch = () => {
-//     onSearch(searchQuery);
-//   };
-
-//   return (
-//     <TextField
-//       label="Search ANIMALS"
-//       variant="outlined"
-//       value={searchQuery}
-//       onChange={(e) => setSearchQuery(e.target.value)}
-//       onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-//     />
-//   );
-// };
-
-// export default searchBar;
-// =================================================================
 
 // CSS style object 
 export const searchStyles = {
     main: {
-        backgroundImage: `url(${searchImage});`,
+        // backgroundImage: `url(${searchImage});`,
         height: '100%',
         width: '100%',
-        color: 'grey',
+        color: 'green',
         backgroundSize: 'contain',
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundAttachment: 'fixed',
-        position: 'absolute',
+        position: 'static',
         overflow: 'auto',
-        paddingBottom: '100px'
+        marginTop: '120px',
+        paddingBottom: '200px',
     },
     grid: {
         marginTop: '25px', 
@@ -88,40 +63,47 @@ export const searchStyles = {
         width: '70vw'
     },
     card: {
-        width: "400px", 
+        width: "1200px",
+        height: '600px', 
         padding: '10px',
         display: "flex",
-        flexDirection: "column",
-        backgroundColor: "rgb(217,156,159)",
+        flexDirection: "row",
+        // search result==================
+        backgroundColor: "ivory",
         border: '2px solid',
         borderColor: theme.palette.primary.main,
-        borderRadius: '10px'
+        borderRadius: '10px',
+        position: 'realative'
     },
     cardInfo: {
-        width: "600px",
+        width: "800px",
         marginRight: 'auto', 
         marginLeft: 'auto',
         padding: '10px',
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "rgb(217,156,159)",
+        // COLOR============================
+        backgroundColor: "ivory",
         border: '2px solid',
         borderColor: '#02C5CF',
         borderRadius: '10px',
         textAlign: 'center'
     },
     cardMedia: {
-        width: '95%',
+        width: '75%',
         margin: 'auto',
         marginTop: '5px',
+        marginBottom: '5px',
         aspectRatio: '1/1',
         border: '1px solid',
         borderColor: theme.palette.primary.main,
-        borderRadius: '10px'
+        borderRadius: '10px',
+        backgroundColor: 'red'
+        // backgroundColor: 'red',
     },
     button: {
         borderWidth: "medium",
-        color: '#grey', 
+        color: 'red', 
         borderRadius: '50px',
         height: '45px',
         width: '100%',
@@ -135,7 +117,7 @@ export const searchStyles = {
     },
     stack2: {
         border: '1px solid', 
-        borderColor: theme.palette.primary.main, 
+        borderColor: 'red', 
         borderRadius: '50px', 
         borderWidth: "medium",
         width: '100%',
@@ -150,10 +132,10 @@ export const searchStyles = {
 
 }
 
-
+// ============================================================
 
 export interface SubmitProps {
-    search: string 
+    select: string 
 }
 
 
@@ -189,13 +171,13 @@ const SearchProps = (saved: SavedProps ) => {
     const onSubmit: SubmitHandler<SubmitProps> = async (_data: SubmitProps, event: any) => {
         if (event) event.preventDefault(); 
 
-        const userId = localStorage.getItem('uuid') 
-        const savedRef = ref(db, `saved/${userId}/`) 
+        const user = localStorage.getItem('uuid') 
+        const savedRef = ref(db, `saved/${user}/`) 
 
       
 
-        // if (mySaved.quantity > parseInt(data.quantity)) {
-        //     mySaved.quantity = parseInt(data.quantity)
+        // if (mySaved.select > parseInt(_data.select)) {
+        //     mySaved.select = parseInt(_data.select)
         // }
 
         
@@ -218,28 +200,26 @@ const SearchProps = (saved: SavedProps ) => {
 
     return (
         <Box>
-            <form onSubmit = {handleSubmit(onSubmit)}>
-                <Button type='submit'>Submit</Button>
-            </form>
-            <Snackbar
-                open={open}
-                autoHideDuration={3000}
-                onClose={()=> setOpen(false)}
-            >
-                <Alert severity = {messageType}>
-                    {message}
-                </Alert>
-            </Snackbar>
-        </Box>
+        <form onSubmit = {handleSubmit(onSubmit)}>
+            <Button type='submit'>Submit</Button>
+        </form>
+        <Snackbar
+            open={open}
+            // autoHideDuration={3000}
+            onClose={()=> setOpen(false)}
+        >
+            <Alert severity = {messageType}>
+                {message}
+            </Alert>
+        </Snackbar>
+    </Box>
     )
 }
 
-
+// ==========================================================================
 export const Search = () => {
-    // hooks
-    // const { searchData } = useGetSearch(); //list of all our data objects 
+
     const [ animalData, setAnimalData ] = useState<SearchProps[]>([])
-    // const [ currentSearch] = useState<SearchProps[]>([]); //one and only one object we will send to our saved 
     const [ _savedOpen, setSavedOpen ] = useState(false); 
 
     console.log(animalData)
@@ -255,8 +235,6 @@ export const Search = () => {
 
         
     }
-
-    
     return (
         <Box sx={ searchStyles.main }>
             <NavBar />
@@ -279,18 +257,70 @@ export const Search = () => {
                 </Box>
                 
             </form>
+          
             <Grid container spacing={3} sx={searchStyles.grid}>
-                {animalData.map((search: SearchProps, index: number ) => (
+                { animalData.map((search: SearchProps, index: number ) => (
                     <Grid item key={index} xs={12} md={6} lg={4}>
                         <Card sx={searchStyles.card}>
+                          
+                            <CardContent>
+                                <Stack 
+                                    direction='column'
+                                    justifyContent='space-between'
+                                    alignItems = 'center'
+                                >
+                                    <Stack 
+                                        direction = 'column'
+                                        alignItems = 'left'
+                                        justifyContent = 'space-between'
+                                   
+                                         sx={{ color: 'charcoal', backgroundColor: 'ivory'  }}>
+                                          
+                                                <Typography>NAME: {search.name}</Typography>
+                                                
+                                                <Typography>HABITAT: {search.habitat}</Typography>
+                                                <Typography>DIET: {search.diet}</Typography>
+                                                <Typography>PREY: {search.prey}</Typography>
+                                                <Typography>NAME OF YOUNG: {search.name_of_young}</Typography>
+                                                <Typography>COMMON NAME: {search.common_name}</Typography>
+                                                <Typography>NUMBER OF SPECIES: {search.number_of_species}</Typography>
+                                                <Typography>WHERE THEY LIVE: {search.location}</Typography>
+                                                <Typography>TYPE OF ANIMAL: {search.group}</Typography>
+                                                {/* I would like the output to look like a card catalog with Typewriter font */}
+                                            {/* fontFamily: 'Fira Code, Consolas, Input, DejaVu Sans Mono, JetBrains Mono, and MonoLisa.' */}
+                                          
+                                        
+                                        
+                                    </Stack>
+                              
+                                    <Button
+                                    size='medium'
+                                    variant='outlined'
+                                    sx={searchStyles.button}
+                                    onClick = {()=>{ setSavedOpen(true)}}
+                                >
+                                    Add to Saved
+                                    {/* {parseFloat(search.name).toFixed(2)} */}
+                                </Button>
+                                </Stack>
+                            </CardContent>
                             <CardMedia 
                                 component='img'
                                 sx={searchStyles.cardMedia}
                                 image={search.image}
                                 alt={search.name}
                             />
-                            <CardContent>
-                                <Stack 
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
+    
+
+        </Box>
+    )
+}
+
+{/* <Stack 
                                     direction='column'
                                     justifyContent='space-between'
                                     alignItems = 'center'
@@ -319,22 +349,4 @@ export const Search = () => {
                                             </AccordionDetails>
                                         
                                         </Accordion>
-                                    </Stack>
-                                <Button
-                                    size='medium'
-                                    variant='outlined'
-                                    sx={searchStyles.button}
-                                    onClick = {()=>{ setSavedOpen(true)}}
-                                >
-                                    Add to Saved - ${parseFloat(search.name).toFixed(2)}
-                                </Button>
-                                </Stack>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid>
-
-        </Box>
-    )
-}
+                                    </Stack> */}

@@ -22,18 +22,17 @@ import { SearchProps } from '../../customHooks';
 import { SubmitProps } from '../Search';
 import { MessageType } from '../Auth';
 import { serverCalls } from '../../api/server';
-
-// we want our columns to match our data object (name, description, price, quantity,....)
+import { updateCollection } from '../../api/server'
 
 const columns: GridColDef[] = [
-  { field: 'image', //thats what needs to match the keys on our objects/dictionaries
-  headerName: 'Image', //this is whats being displayed as the column header
+  { field: 'image', 
+  headerName: 'Image', 
   width: 150,
-   renderCell: (param) => ( //we are rendering html thats why we have () not {}
+   renderCell: (param) => ( 
         <img 
-            src={param.row.image} //param is whole list, row is object in that list, image is key on that object
+            src={param.row.image} 
             alt={param.row.name}
-            style = {{ maxHeight: '100%', aspectRatio: '1/1'}} //making this a square no matter what size our image is 
+            style = {{ maxHeight: '100%', aspectRatio: '1/1'}} 
         ></img>
    ) 
 },
@@ -97,7 +96,7 @@ interface UpdateProps {
 }
 
 
-const UpdateQuantity = (props: UpdateProps) => {
+const UpdateSelect = (props: UpdateProps) => {
     // setting up our hooks
     const [ openAlert, setOpen ] = useState(false)
     const [ message, setMessage ] = useState<string>()
@@ -117,22 +116,21 @@ const UpdateQuantity = (props: UpdateProps) => {
     const onSubmit: SubmitHandler<SubmitProps> = async (data: SubmitProps, event: any) => {
         if (event) event.preventDefault();
 
-        let collectionId = ""
-        let prodId = ""
+        // let collectionId = ""
+        
 
-        for (let collection of props.collectionData) {
-            if (collection.id === props.id) {
-                // collectionId = collection.collection_id as string
-                // prodId = collection.prod_id as string 
-            }
-        }
+        // for (let collection of props.collectionData) {
+        //     if (collection.name === props.id) {
+        //         collectionId = collection.collection as string
+  
+        //     }
+        // }
 
         const updateData = {
-            "prod_id" : prodId,
-            "quantity" : data.quantity
+            "select" : data.select
         }
 
-        const response = await serverCalls.updateData(collectionId, updateData)
+        const response = await serverCalls.updateCollection(Collection,updateData)
         if (response.status === 200){
             setMessage('Successfully updated item in your collection')
             setMessageType('success')
@@ -151,8 +149,8 @@ const UpdateQuantity = (props: UpdateProps) => {
         <Box sx={{padding: '20px'}}>
             <form onSubmit = {handleSubmit(onSubmit)}>
                 <Box>
-                    <label htmlFor="quantity">What is the updated quantity?</label>
-                    <InputText {...register('quantity')} name='quantity' placeholder='Quantity Here' />
+                    <label htmlFor="select">What is the updated selection?</label>
+                    <InputText {...register('select')} name='select' placeholder='Selection Here' />
                 </Box>
                 <Button type='submit'>Submit</Button>
             </form>
@@ -189,9 +187,9 @@ export const Collection = () => {
 
 
        
-        let collection_id = ""
-        let prod_id = ""
-
+        let collectionData = ""
+       
+//        I am not using "id's" might need to adjust
         if (id === 'undefined'){
             setMessage('No collection Selected')
             setMessageType('error')
@@ -202,8 +200,8 @@ export const Collection = () => {
 
 
         
-        for (let collection of collectionData){
-            if (collection.id === id){
+        for (let _collection of collectionData){
+            if (collectionData === id){
                 // collection_id = collection.collection_id as string
                 // prod_id = collection.prod_id as string
             }
@@ -212,10 +210,10 @@ export const Collection = () => {
         // make a little dictionary to pass to our api call needs to match format of what flask is expecting
 
         const deleteData = {
-            'prod_id': prod_id
+            'collection': collectionData
         }
 
-        const response = await serverCalls.deleteCollection(collection_id, deleteData)
+        const response = await serverCalls.deleteCollection(Collection,deleteData)
 
         if (response.status === 200) {
             setMessage('Successfully deleted item from collection')
@@ -254,9 +252,9 @@ export const Collection = () => {
       <Button variant='contained' color='warning' onClick={deleteItem}>Delete</Button>
       <Dialog open={openDialog} onClose={()=> setDialogOpen(false)}>
         <DialogContent>
-            <DialogContentText>Collection id: {gridData[0]}</DialogContentText>
+            <DialogContentText>Collection Data: {gridData[0]}</DialogContentText>
         </DialogContent>
-        <UpdateQuantity id={`${gridData[0]}`} collectionData = {collectionData} />
+        <UpdateSelect id={`${gridData[0]}`} collectionData = {collectionData} />
         <DialogActions>
             <Button onClick = { ()=> setDialogOpen(false)}>Cancel</Button>
         </DialogActions>
