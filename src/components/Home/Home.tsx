@@ -38,7 +38,8 @@ const MainText = styled('div')({
     color: 'white',
     borderColor: 'black',
     textShadow: "-1px 1px 0 #000,1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;" ,
-   
+    zoom: 'transition: tansform .2s',
+    zoomHover: 'scale(1.5)'
 })
 
 

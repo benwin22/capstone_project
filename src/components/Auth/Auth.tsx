@@ -23,32 +23,48 @@ import {
 
 // internal imports
 import { NavBar, InputText, InputPassword } from '../sharedComponents/';
-import searchImage from '../../assets/images/animals2.png';
+import searchImage from '../../assets/images/land_sea.jpeg';
 
 const authStyles = {
     main: {
         backgroundImage: `url(${searchImage});`,
         width: '100%',
         height: '100%',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center top 5px', 
-        position: 'absolute',
-        marginTop: '10px',
+        backgroundSize: 'cover',
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "fixed",
+        backgroundAttachment: 'fixed',
+        position: 'static',
+        overflow: 'auto',
+        marginTop: '200px',
+        paddingTop: '0px',
+        paddingBottom: '1000px',
+        textShadow: "-1px 1px 0 #000,1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;"
         // color: 'red'
     },
     stack: {
         width: '400px',
-        marginTop: '500px',
+        marginTop: '10px',
         marginRight: 'auto',//center div
         marginLeft: 'auto',
-        color: 'blue'
+        color: '#F59C1D',
+       
     },
     button: {
-        height: '50px',
-        width: '175px',
-        fontSize: '14px',
-        color: 'blue'
+        borderWidth: "thick",
+        color: '#B6BEC3', 
+        borderRadius: '50px',
+        borderColor: 'black',
+        border: '1px solid',
+        backgroundColor: '#FBAB3D',
+        height: '45px',
+        width: '100%',
+        marginTop: '10px',
+        fontSize: '20px',
+        textShadow: "-1px 1px 0 #000,1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;" ,
+      
+       
+       
         
     }
 }
@@ -268,7 +284,7 @@ export const Auth = (props:Props) => {
                         {props.title}
                     </Typography>
                     <br />
-                    <Typography variant='h5'>
+                    <Typography variant='h2'>
                         LETS EXPLORE WILD ANIMALS!
                     </Typography>
                     <NavBar />
@@ -276,7 +292,7 @@ export const Auth = (props:Props) => {
                     <GoogleButton open={open} onClick={() => setOpen(false)}/>
                     <Divider variant='fullWidth' color = 'white' />
                     <br />
-                    <Stack
+                    <Stack 
                         width = '100%'
                         alignItems='center'
                         justifyContent='space-between'

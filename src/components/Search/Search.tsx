@@ -167,12 +167,12 @@ export interface AnimalProps {
     image: string,
     name: string,
     // habitat: string,
-    diet: string,
+    // diet: string,
     // prey: string,
     // name_of_young: string,
     // common_name: string,
     // number_of_species: string,
-    location:string,
+    // location:string,
     // group: string,
    
 }
@@ -292,14 +292,14 @@ export const Search = () => {
                                          sx={{ color: 'charcoal', backgroundColor: 'ivory'  }}>
                                           
                                                 <Typography>NAME: {search.name}</Typography>
-                                                <Typography>DIET: {search.diet}</Typography>
+                                                {/* <Typography>DIET: {search.diet}</Typography>
                                                 <Typography>LOCATION: {search.location}</Typography>
-                                                {/* <Typography>HABITAT: {search.habitat}</Typography>
+                                                <Typography>HABITAT: {search.habitat}</Typography>
                                                
                                                 <Typography>PREY: {search.prey}</Typography>
-                                                <Typography>NAME OF YOUNG: {search.name_of_young}</Typography>
-                                                <Typography>COMMON NAME: {search.common_name}</Typography>
-                                                <Typography>NUMBER OF SPECIES: {search.number_of_species}</Typography>
+                                                <Typography>NAME OF YOUNG: {search.name_of_young}</Typography> */}
+                                                {/* <Typography>COMMON NAME: {search.common_name}</Typography> */}
+                                                {/* <Typography>NUMBER OF SPECIES: {search.number_of_species}</Typography>
                                                 <Typography>WHERE THEY LIVE: {search.location}</Typography>
                                                 <Typography>TYPE OF ANIMAL: {search.group}</Typography> */}
                                                 {/* I would like the output to look like a card catalog with Typewriter font */}
