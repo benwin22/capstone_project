@@ -42,13 +42,13 @@ const authStyles = {
         marginTop: '500px',
         marginRight: 'auto',//center div
         marginLeft: 'auto',
-        color: '#EAA241'
+        color: 'blue'
     },
     button: {
         height: '50px',
         width: '175px',
         fontSize: '14px',
-        color: 'red'
+        color: 'blue'
         
     }
 }

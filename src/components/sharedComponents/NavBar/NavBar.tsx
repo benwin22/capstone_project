@@ -105,7 +105,7 @@ export const NavBar = () => {
         }
     ]
 // nav bar button
-    let signInText = 'SignIn!!!'
+    let signInText = 'Sign In'
 
     if (myAuth === 'true') {
          signInText = 'Sign Out'
@@ -131,8 +131,18 @@ export const NavBar = () => {
                 position = 'fixed'
                 >
                 <Toolbar>
-                    
-                    <IconButton 
+                <List>
+                    {navLinks.map((item) => {
+                        const { text, icon, onClick } = item;
+                        return (
+                            <ListItemButton key={text} onClick={onClick}>
+                                <ListItemText primary={text} />
+                                {icon}
+                            </ListItemButton>
+                        )
+                    })}
+                </List>
+                    {/* <IconButton 
                         color='inherit'
                         // aria-label='open drawer'
                         onClick = { ()=>{navigate('/')}}
@@ -142,9 +152,9 @@ export const NavBar = () => {
                         <Typography>Home</Typography>
                         <PetsIcon />
                            
-                    </IconButton>
+                    </IconButton> */}
                     
-                    <IconButton 
+                    {/* <IconButton 
                         color='inherit'
                         // aria-label='open drawer'
                         onClick = { ()=>{navigate('/search')}}
@@ -163,7 +173,7 @@ export const NavBar = () => {
                     >
                         <Typography>Saved</Typography>
                         <CollectionsBookmarkIcon />                       
-                    </IconButton>
+                    </IconButton> */}
                 </Toolbar>
                
                 <Stack 
@@ -187,18 +197,8 @@ export const NavBar = () => {
             </AppBar>
        
            
-            {/* <Divider />
-                <List>
-                    {navLinks.map((item) => {
-                        const { text, icon, onClick } = item;
-                        return (
-                            <ListItemButton key={text} onClick={onClick}>
-                                <ListItemText primary={text} />
-                                {icon}
-                            </ListItemButton>
-                        )
-                    })}
-                </List> */}
+            <Divider />
+                
         </Box >
     )
 };

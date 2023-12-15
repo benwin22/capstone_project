@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <ThemeProvider theme={ theme }>
         <Router>
           <Routes>
-            <Route path='/' element = {<Home title = {"WILD ANIMALS"}/>}/>
+            <Route path='/' element = {<Home title={''} />}/>
             <Route path='/auth' element = {<Auth title = {"WILD ANIMALS"}/>}/>
             <Route path='/search' element = {<Search />} />
             <Route path='/saved' element = {<Saved />} />

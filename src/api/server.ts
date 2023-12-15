@@ -22,14 +22,14 @@ export const serverCalls = {
         let result = [{
             "image": await serverCalls.getImage(name),
             "name": data.name as string,
-            "habitat": data.characteristics.habitat as string,
-            "diet": data.characteristics.diet as string,
-            "prey": data.characteristics.prey as string,
-            "name_of_young": data.characteristics.name_of_young as string,
-            "common_name": data.characteristics.common_name as string,
-            "number_of_species": data.characteristics.number_of_species as string,
-            "location": data.characteristics.location as string,
-            "group": data.characteristics.group as string
+            // "habitat": data.characteristics.habitat as string,
+            // "diet": data.characteristics.diet as string,
+            // "prey": data.characteristics.prey as string,
+            // "name_of_young": data.characteristics.name_of_young as string,
+            // "common_name": data.characteristics.common_name as string,
+            // "number_of_species": data.characteristics.number_of_species as string,
+            // "location": data.characteristics.location as string,
+            // "group": data.characteristics.group as string
         }]
         console.log(result)
           return(result)

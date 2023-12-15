@@ -26,7 +26,7 @@ const Main = styled('main')({
     backgroundPosition: 'center top 5px', 
     position: 'absolute',
     marginTop: '100px',
-    color: '#02C5CF'
+    
 })
 
 const MainText = styled('div')({
@@ -35,7 +35,7 @@ const MainText = styled('div')({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    color: 'green',
+    color: 'purple',
     borderColor: 'black',
     textShadow: "-1px 1px 0 #000,        1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;" 
 })
@@ -43,6 +43,7 @@ const MainText = styled('div')({
 
 // This is our firsst functional based component!
 export const Home = (props: Props) => {
+    const myAuth = localStorage.getItem('auth')
 
     // return is always HTML & it can have ONLY 1 parent div 
     return (
@@ -51,7 +52,7 @@ export const Home = (props: Props) => {
             <Main>
                 <MainText>
                     <Typography variant='h1'> { props.title }</Typography>
-                    <Button sx={{ marginTop: '400px'}} component={Link} to={"/search"} variant='contained'>Let's Explore the Wold of Animals!</Button>
+                    <Button sx={{ marginTop: '400px', fontSize: '50px', backgroundColor: 'red'}} component={Link} to={myAuth === 'true' ? "/search" : "/auth"}>Let's Explore the Wold of Animals!</Button>
                 </MainText>
             </Main>
         </Root>

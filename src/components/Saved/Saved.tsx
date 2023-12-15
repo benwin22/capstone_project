@@ -7,7 +7,6 @@ import {
     Card,
     CardContent,
     CardMedia,
-    Grid,
     Box,
     Button,
     Stack,
@@ -21,9 +20,9 @@ import { getDatabase, ref, onValue, off, remove, update } from 'firebase/databas
 import { NavBar } from '../sharedComponents';
 import { theme } from '../../Theme/themes';
 import { SearchProps } from '../../customHooks';
-import { searchStyles } from '../Search';
+import { AnimalProps, searchStyles } from '../Search';
 import { MessageType } from '../Auth'; 
-import { serverCalls } from '../../api/server';
+import { serverCalls } from '../../api';
 // import { Collection } from '../Collection';
 
 
@@ -34,9 +33,9 @@ import { serverCalls } from '../../api/server';
 
 
 
-export interface CreateCollectionProps {
-    collection: SearchProps[]
-}
+// export interface CreateCollectionProps {
+//     collection: SearchProps[]
+// }
 
 
 export const Saved = () => {
@@ -123,7 +122,7 @@ export const Saved = () => {
     }
 
 
-    // I don't have items
+  
     const deleteItem = async (savedItem: SearchProps ) => {
 
         const itemRef = ref(db, `saved/${user}/${savedItem.id}`)
@@ -145,130 +144,51 @@ export const Saved = () => {
             setOpen(true)
         })
     }
-    // function updateSelect(name: any, arg1: string) {
-    //     throw new Error('Function not implemented.');
-    // }
-
-// not sure I need this code....
-    // const catalog = async () => {
-
-    //     const data: CreateCollectionProps = {
-    //         'collection': currentSaved as SearchProps[]
-    //     }
-
-    //     const response = await serverCalls.createCollection(data)
-
-    //     if (response.status === 200){ //200 is a good status code
-    //         remove(savedRef) //this is removing our whole entire cartRef aka emptying our cart
-    //         .then(() => {
-    //             console.log("Saved cleared successfully")
-    //             setMessage('Successfully compiled')
-    //             setMessageType('success')
-    //             setOpen(true)
-    //             setTimeout(()=>{window.location.reload()}, 2000)
-    //         })
-    //         .catch((error) => {
-    //             console.log("Error clearing Saved: " + error.message)
-    //             setMessage(error.message)
-    //             setMessageType('error')
-    //             setOpen(true)
-    //             setTimeout(()=>{window.location.reload()}, 2000)
-    //         })
-    //     } else {
-    //         setMessage('Error with your Saved')
-    //         setMessageType('error')
-    //         setOpen(true)
-    //         setTimeout(()=>{window.location.reload()}, 2000)
-    //     }
-
-    // }
-
-
-
+   
     return (
         <Box sx={searchStyles.main}>
             <NavBar />
+           
             <Stack direction = 'column' sx={searchStyles.main} alignItems='center'>
-                <Stack direction = 'row' alignItems = 'center' sx={{marginTop: '100px', marginLeft: '0'}}>
+                <Stack direction = 'column' alignItems = 'center' sx={{marginTop: '100px', marginLeft: '0'}}>
                     <Typography 
+
                         variant = 'h4'
                         sx = {{ marginRight: '40px'}}
                     >
                        Saved Animals
                     </Typography>
-                    {/* <Button color = 'primary' variant = 'contained' onClick={ catalog } >Compile</Button> */}
+                   
                 </Stack>
-                <Grid container spacing={3} sx={searchStyles.grid}>
-                    {currentSaved?.map((saved: SearchProps, index: number) => (
-                        <Grid item key={index} xs={12} md={6} lg={4}>
+                
+                <Stack spacing={8} sx={searchStyles.stack}>
+                    {currentSaved?.map((saved: AnimalProps, index: number) => (
+                        
+                        <Stack key={saved.id}>
                             <Card sx={searchStyles.card}>
-                                <CardMedia 
-                                    component = 'img'
-                                    sx = {searchStyles.cardMedia}
-                                    image = {saved.image}
-                                    alt = {saved.name}
-                                />
+                               
                                 <CardContent>
-                                    <Stack direction = 'column' justifyContent='space-between' alignItems = 'center'>
-                                        <Accordion sx = {{color: 'white', backgroundColor: theme.palette.secondary.light}}>
-                                            <AccordionSummary 
-                                                expandIcon={<InfoIcon sx={{color: theme.palette.primary.main}}/>}
-                                            >@#$%
-                                                <Typography>{saved.name}</Typography>
-                                            </AccordionSummary>
-                                            <AccordionDetails>
-                                                <Typography>{saved.habitat}</Typography>
-                                            </AccordionDetails>
-                                            <AccordionDetails>
-                                                <Typography>{saved.diet}</Typography>
-                                            </AccordionDetails>
-                                            <AccordionDetails>
-                                                <Typography>{saved.prey}</Typography>
-                                            </AccordionDetails>
-                                            <AccordionDetails>
-                                                <Typography>{saved.name_of_young}</Typography>
-                                            </AccordionDetails>
-                                            <AccordionDetails>
-                                                <Typography>{saved.common_name}</Typography>
-                                            </AccordionDetails>
-                                            <AccordionDetails>
-                                                <Typography>{saved.number_of_species}</Typography>
-                                            </AccordionDetails>
-                                            <AccordionDetails>
-                                                <Typography>{saved.location}</Typography>
-                                            </AccordionDetails>
-                                            <AccordionDetails>
-                                                <Typography>{saved.group}</Typography>
-                                            </AccordionDetails>
-                                        </Accordion>
-                                        <Stack 
-                                            direction = 'row' 
-                                            alignItems = 'center' 
-                                            justifyContent='space-between' 
-                                            sx={searchStyles.stack2}
-                                        >
-                                            <Button 
-                                                size='large'
-                                                variant='text'
-                                                onClick={()=>{updateSelect(saved.name, 'dec')}}
-                                            >-</Button>
-                                            <Typography variant = 'h6' sx={{color: 'red'}}>
-                                                {saved.select}
-                                            </Typography>
-                                            <Button 
-                                                size='large'
-                                                variant='text'
-                                                onClick={()=>{updateSelect(saved.name, 'inc')}}
-                                            >+</Button>
-                                        </Stack>
-                                        <Button 
-                                            size = 'medium'
-                                            variant = 'outlined'
-                                            sx = {searchStyles.button}
-                                            onClick = {()=>{updateSaved(saved)}}
-                                        >
-                                            Update Select(Don't need this) = ${(saved.select * parseFloat(saved.name)).toFixed(2)}
-                                        </Button>
+                                <Stack 
+                                        direction = 'column'
+                                        alignItems = 'left'
+                                        justifyContent = 'space-between'
+                                   
+                                         sx={{ color: 'charcoal', backgroundColor: 'ivory'  }}>
+                                          
+                                                <Typography>NAME: {saved.name}</Typography>
+                                                
+                                                {/* <Typography>HABITAT: {saved.habitat}</Typography>
+                                                <Typography>DIET: {saved.diet}</Typography>
+                                                <Typography>PREY: {saved.prey}</Typography>
+                                                <Typography>NAME OF YOUNG: {saved.name_of_young}</Typography>
+                                                <Typography>COMMON NAME: {saved.common_name}</Typography>
+                                                <Typography>NUMBER OF SPECIES: {saved.number_of_species}</Typography>
+                                                <Typography>WHERE THEY LIVE: {saved.location}</Typography>
+                                                <Typography>TYPE OF ANIMAL: {saved.group}</Typography> */}
+                                                {/* I would like the output to look like a card catalog with Typewriter font */}
+                                            {/* fontFamily: 'Fira Code, Consolas, Input, DejaVu Sans Mono, JetBrains Mono, and MonoLisa.' */}
+
+                                   
                                         <Button 
                                             size = 'medium'
                                             variant = 'outlined'
@@ -277,22 +197,22 @@ export const Saved = () => {
                                         >
                                             Delete Item From Saved
                                         </Button>
+                                        
                                     </Stack>
+                                    
                                 </CardContent>
+                                <CardMedia 
+                                    component = 'img'
+                                    sx = {searchStyles.cardMedia}
+                                    image = {saved.image}
+                                    alt = {saved.name}
+                                />
                             </Card>
 
-                        </Grid>
+                        </Stack>
                     ))}
-                </Grid>
-                <Stack direction = 'column' sx={{marginLeft: ''}}>
-                    <Typography 
-                        variant = 'h4'
-                        sx={{ marginTop: '50px', marginBottom: '100px'}}
-                        >
-                            Your Collections
-                        </Typography>
-                        {/* <Collection /> */}
                 </Stack>
+                
             </Stack>
             <Snackbar
                 open={open}
