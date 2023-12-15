@@ -4,22 +4,22 @@ import * as _React from 'react';
 // import React from 'react'; 
 import { useState } from 'react';
 import {
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
+    // Accordion,
+    // AccordionSummary,
+    // AccordionDetails,
     Card,
     CardContent,
     CardMedia,
     Box,
     Button,
-    Dialog,
-    DialogContent,
-    DialogContentText,
+    // Dialog,
+    // DialogContent,
+    // DialogContentText,
     Stack,
     Typography,
     Snackbar,
     Alert } from '@mui/material'; 
-import InfoIcon from '@mui/icons-material/Info';
+// import InfoIcon from '@mui/icons-material/Info';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { getDatabase, ref, push } from 'firebase/database'; 
 // ======================================================
@@ -155,6 +155,7 @@ export const searchStyles = {
 // ============================================================
 
 export interface SubmitProps {
+    [x: string]: string;
     select: string 
 }
 
@@ -164,6 +165,7 @@ export interface SavedProps {
 }
 
 export interface AnimalProps {
+    id: string,
     image: string,
     name: string,
     // habitat: string,
@@ -234,7 +236,7 @@ export const SearchProps = (saved: SavedProps ) => {
 export const Search = () => {
 
     const [ animalData, setAnimalData ] = useState<AnimalProps[]>([])
-    const [ _savedOpen, setSavedOpen ] = useState(false); 
+    const [ _savedOpen,  ] = useState(false); 
 
 
     const { register, handleSubmit } = useForm<SubmitProps>({})
@@ -273,7 +275,7 @@ export const Search = () => {
             </form>
           
             <Stack spacing={3} sx={searchStyles.stack}>
-                { animalData.map((search: AnimalProps, index: number ) => (
+                { animalData.map((search: AnimalProps, _index: number ) => (
                     
                     <Stack >
                         <Card sx={searchStyles.card}>

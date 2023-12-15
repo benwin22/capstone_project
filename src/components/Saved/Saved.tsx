@@ -18,7 +18,7 @@ import { getDatabase, ref, onValue, off, remove, update } from 'firebase/databas
 // internal imports
 import { NavBar } from '../sharedComponents';
 // import { theme } from '../../Theme/themes';
-// import { SearchProps } from '../../customHooks';
+// import { AnimalProps } from '../../customHooks';
 import { AnimalProps, searchStyles } from '../Search';
 import { MessageType } from '../Auth'; 
 import { serverCalls } from '../../api/server';
@@ -43,7 +43,7 @@ export const Saved = () => {
     const [ open, setOpen ] = useState(false)
     const [ message, setMessage] = useState<string>()
     const [ messageType, setMessageType ] = useState<MessageType>()
-    const [ currentSaved, setCurrentSaved ] = useState<SearchProps[]>()
+    const [ currentSaved, setCurrentSaved ] = useState<AnimalProps[]>()
     const user = localStorage.getItem('uuid')
     const savedRef = ref(db, `saved/${user}/`); 
 
@@ -59,13 +59,13 @@ export const Saved = () => {
 
             if (data){
                 for (let [key, value] of Object.entries(data)){
-                    let savedItem = value as SearchProps
+                    let savedItem = value as AnimalProps
                     savedItem['id'] = key
                     savedList.push(savedItem)
                 }
             }
 
-            setCurrentSaved(savedList as SearchProps[])
+            setCurrentSaved(savedList as AnimalProps[])
         })
 
         
@@ -96,33 +96,33 @@ export const Saved = () => {
     // }
 
    
-    const updateSaved = async ( savedItem: SearchProps ) => {
+    // const updateSaved = async ( savedItem: AnimalProps ) => {
 
-        const itemRef = ref(db, `saveds/${user}/${savedItem.id}`)
+    //     const itemRef = ref(db, `saveds/${user}/${savedItem.id}`)
 
 
         
-        update(itemRef, {
-            select: savedItem.select
-        })
-        .then(() => {
-            setMessage('Successfully Updated Your Saved')
-            setMessageType('success')
-            setOpen(true)
-        })
-        .then(() => {
-            setTimeout(() => window.location.reload(), 2000)
-        })
-        .catch((error) => {
-            setMessage(error.message)
-            setMessageType('error')
-            setOpen(true)
-        })
-    }
+    //     update(itemRef, {
+    //         select: savedItem.select
+    //     })
+    //     .then(() => {
+    //         setMessage('Successfully Updated Your Saved')
+    //         setMessageType('success')
+    //         setOpen(true)
+    //     })
+    //     .then(() => {
+    //         setTimeout(() => window.location.reload(), 2000)
+    //     })
+    //     .catch((error) => {
+    //         setMessage(error.message)
+    //         setMessageType('error')
+    //         setOpen(true)
+    //     })
+    // }
 
 
   
-    const deleteItem = async (savedItem: SearchProps ) => {
+    const deleteItem = async (savedItem: AnimalProps ) => {
 
         const itemRef = ref(db, `saved/${user}/${savedItem.id}`)
 
