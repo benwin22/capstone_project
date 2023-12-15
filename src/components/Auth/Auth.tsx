@@ -39,7 +39,7 @@ const authStyles = {
         marginTop: '200px',
         paddingTop: '0px',
         paddingBottom: '1000px',
-        textShadow: "-1px 1px 0 #000,1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;"
+        // textShadow: "-1px 1px 0 #000,1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;"
         // color: 'red'
     },
     stack: {
