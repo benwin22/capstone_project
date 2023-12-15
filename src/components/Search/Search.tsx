@@ -31,7 +31,7 @@ import { getDatabase, ref, push } from 'firebase/database';
 import { NavBar, InputText } from '../sharedComponents';
 import { theme } from '../../Theme/themes';
 import { MessageType } from '../Auth';
-import  searchImage  from '../../assets/images/animal_print1.jpeg';
+import  searchImage  from '../../assets/images/land_sea.jpeg';
 import { serverCalls } from '../../api';
 // import {customFont} from '../../../src/index.css';
 // import SearchProps from '../Search';
@@ -48,13 +48,14 @@ export const searchStyles = {
         width: '100%',
         color: 'charcoal',
         
-        backgroundSize: '100%',
+        backgroundSize: 'cover',
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
+        backgroundPosition: "fixed",
         backgroundAttachment: 'fixed',
         position: 'static',
         overflow: 'auto',
         marginTop: '120px',
+        paddingTop: '50px',
         paddingBottom: '1000px',
     },
     grid: {
@@ -65,7 +66,8 @@ export const searchStyles = {
     },
     card: {
         width: "1100px",
-        marginLeft: '150px',
+        marginRight: 'auto', 
+        marginLeft: 'auto',
         height: '600px', 
         padding: '10px',
         display: "flex",
@@ -73,9 +75,13 @@ export const searchStyles = {
         // search result==================
         backgroundColor: "ivory",
         border: '2px solid',
-        borderColor: theme.palette.primary.main,
+        borderColor: 'orange',
         borderRadius: '10px',
-        position: 'center'
+        justifyContent: 'center',
+        zoom: 'transition: tansform .2s',
+        zoomHover: 'scale(1.5)'
+        
+        
     },
     cardInfo: {
         width: "800px",
@@ -85,11 +91,16 @@ export const searchStyles = {
         display: "flex",
         flexDirection: "column",
         // COLOR============================
-        backgroundColor: "ivory",
+        backgroundColor: "#9AB9CB",
+        // opacity: '.95',
         border: '2px solid',
-        borderColor: '#02C5CF',
+        borderColor: 'orange',
         borderRadius: '20px',
-        textAlign: 'center'
+        textAlign: 'center',
+        // fontSize: '100px',
+        marginBottom: '40px',
+        position: 'relative',
+       
     },
     cardMedia: {
         width: '75%',
@@ -100,26 +111,31 @@ export const searchStyles = {
         border: '1px solid',
         borderColor: theme.palette.primary.main,
         borderRadius: '10px',
+        backgroundSize: 'contain'
         
-        // backgroundColor: 'red',
+ 
     },
     button: {
-        borderWidth: "medium",
-        color: 'charcoal', 
+        borderWidth: "thick",
+        color: '#B6BEC3', 
         borderRadius: '50px',
+        backgroundColor: '#FBAB3D',
         height: '45px',
         width: '100%',
-        marginTop: '10px'
+        marginTop: '10px',
+        fontSize: '20px',
+        textShadow: "-1px 1px 0 #000,1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;" ,
         
     },
     stack: {
         width: '75%', 
         marginLeft: 'auto', 
-        marginRight: 'auto'
+        marginRight: 'auto',
+        borderColor: 'orange',
     },
     stack2: {
         border: '1px solid', 
-        borderColor: 'red', 
+        borderColor: 'orange',
         borderRadius: '50px', 
         borderWidth: "medium",
         width: '100%',
@@ -127,8 +143,10 @@ export const searchStyles = {
     },
     typography: { 
         marginLeft: '40vw', 
-        color: "#2BA4C1", 
-        marginTop: '100px'
+        textShadow: "-1px 1px 0 #000,1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;",
+        color: "#FFFF", 
+        marginTop: '100px',
+        fontSize: '30px'
     },
     
 
@@ -149,12 +167,12 @@ export interface AnimalProps {
     image: string,
     name: string,
     // habitat: string,
-    // diet: string,
+    diet: string,
     // prey: string,
     // name_of_young: string,
     // common_name: string,
     // number_of_species: string,
-    // location:string,
+    location:string,
     // group: string,
    
 }
@@ -195,7 +213,9 @@ export const SearchProps = (saved: SavedProps ) => {
     return (
         <Box>
         <form onSubmit = {handleSubmit(onSubmit)}>
+            <Button sx={{borderColor: 'orange', }}>
             <Button type='submit'>Submit</Button>
+            </Button>
         </form>
         <Snackbar
             open={open}
@@ -272,9 +292,10 @@ export const Search = () => {
                                          sx={{ color: 'charcoal', backgroundColor: 'ivory'  }}>
                                           
                                                 <Typography>NAME: {search.name}</Typography>
-                                                
-                                                {/* <Typography>HABITAT: {search.habitat}</Typography>
                                                 <Typography>DIET: {search.diet}</Typography>
+                                                <Typography>LOCATION: {search.location}</Typography>
+                                                {/* <Typography>HABITAT: {search.habitat}</Typography>
+                                               
                                                 <Typography>PREY: {search.prey}</Typography>
                                                 <Typography>NAME OF YOUNG: {search.name_of_young}</Typography>
                                                 <Typography>COMMON NAME: {search.common_name}</Typography>

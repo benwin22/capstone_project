@@ -4,7 +4,7 @@ import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom'; 
 
 
-import searchBackgroundImage from '../../assets/images/animals.jpg'; 
+import searchBackgroundImage from '../../assets/images/land_sea.jpeg'; 
 import { NavBar, InputText } from '../sharedComponents';
 
 interface Props {
@@ -21,23 +21,24 @@ const Main = styled('main')({
     backgroundImage: `url(${searchBackgroundImage});`,
     width: '100%',
     height: '100%',
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundRepeat: '',
     backgroundPosition: 'center top 5px', 
-    position: 'absolute',
-    marginTop: '100px',
+    position: 'fixed',
+    marginTop: '50px',
     
 })
 
 const MainText = styled('div')({
     textAlign: 'center',
     position: 'relative',
-    top: '50%',
+    top: '40%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    color: 'purple',
+    color: 'white',
     borderColor: 'black',
-    textShadow: "-1px 1px 0 #000,        1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;" 
+    textShadow: "-1px 1px 0 #000,1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;" ,
+   
 })
 
 
@@ -51,8 +52,8 @@ export const Home = (props: Props) => {
              <NavBar />
             <Main>
                 <MainText>
-                    <Typography variant='h1'> { props.title }</Typography>
-                    <Button sx={{ marginTop: '400px', fontSize: '50px', backgroundColor: 'red'}} component={Link} to={myAuth === 'true' ? "/search" : "/auth"}>Let's Explore the Wold of Animals!</Button>
+                    <Typography variant='h1'> { props.title }ANIMAL DATABASE FOR KIDS!</Typography>
+                    <Button sx={{ marginTop: '100px', fontSize: '75px',}} component={Link} to={myAuth === 'true' ? "/search" : "/auth"}>CLICK HERE TO EXPLORE!</Button>
                 </MainText>
             </Main>
         </Root>

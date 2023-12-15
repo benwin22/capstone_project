@@ -9,7 +9,7 @@ export const theme = createTheme({
 
     palette: {
         primary: {
-            main: '#2BA4C1'
+            main: '#FFFFF'
         },
         secondary: {
             main: '#7DC61B',

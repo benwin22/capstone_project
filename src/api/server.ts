@@ -23,12 +23,12 @@ export const serverCalls = {
             "image": await serverCalls.getImage(name),
             "name": data.name as string,
             // "habitat": data.characteristics.habitat as string,
-            // "diet": data.characteristics.diet as string,
+            "diet": data.characteristics.diet as string,
             // "prey": data.characteristics.prey as string,
             // "name_of_young": data.characteristics.name_of_young as string,
             // "common_name": data.characteristics.common_name as string,
             // "number_of_species": data.characteristics.number_of_species as string,
-            // "location": data.characteristics.location as string,
+            "location": data.characteristics.location as string,
             // "group": data.characteristics.group as string
         }]
         console.log(result)
@@ -52,134 +52,7 @@ export const serverCalls = {
         
         //   return(result)
     },
-    // getCollection: async (name:string) => {
-    //     console.log(name)
-    //     const response = await fetch(`https://api.api-ninjas.com/v1/animals?name=${name}`, {
-    //         method: 'GET',
-    //         headers: {
-    //             'X-Api-Key': '3lc9yJ6KSyXit56QcYZ0CQ==IuOdCEz7ITQC86n6',
-
-    //         }
-    //     });
-
-    //     if (!response.ok) {
-    //         throw new Error('Failed to fetch data'), response.status
-    //     }
-
-    //     let data = await response.json()
-    //     data = data[0]
-    //     console.log(data)
-    //     let result = [{
-    //         "image": await serverCalls.getImage(name),
-    //         "name": data.name as string,
-    //         "habitat": data.characteristics.habitat as string,
-    //         "diet": data.characteristics.diet as string,
-    //         "prey": data.characteristics.prey as string,
-    //         "name_of_young": data.characteristics.name_of_young as string,
-    //         "common_name": data.characteristics.common_name as string,
-    //         "number_of_species": data.characteristics.number_of_species as string,
-    //         "location": data.characteristics.location as string,
-    //         "group": data.characteristics.group as string
-    //     }]
-    //     console.log(result)
-    //       return(result)
-    // },
-    // createCollection: async (name:string) => {
-    //     console.log(name)
-    //     const response = await fetch(`https://api.api-ninjas.com/v1/animals?name=${name}`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'X-Api-Key': '3lc9yJ6KSyXit56QcYZ0CQ==IuOdCEz7ITQC86n6',
-
-    //         }
-    //     });
-
-    //     if (!response.ok) {
-    //         throw new Error('Failed to fetch data'), response.status
-    //     }
-
-    //     let data = await response.json()
-    //     data = data[0]
-    //     console.log(data)
-    //     let result = [{
-    //         "image": await serverCalls.getImage(name),
-    //         "name": data.name as string,
-    //         "habitat": data.characteristics.habitat as string,
-    //         "diet": data.characteristics.diet as string,
-    //         "prey": data.characteristics.prey as string,
-    //         "name_of_young": data.characteristics.name_of_young as string,
-    //         "common_name": data.characteristics.common_name as string,
-    //         "number_of_species": data.characteristics.number_of_species as string,
-    //         "location": data.characteristics.location as string,
-    //         "group": data.characteristics.group as string
-    //     }]
-    //     console.log(result)
-    //       return(result)
-    // },
-    // updateData: async (name:string) => {
-    //     console.log(name)
-    //     const response = await fetch(`https://api.api-ninjas.com/v1/animals?name=${name}`, {
-    //         method: 'PUT',
-    //         headers: {
-    //             'X-Api-Key': '3lc9yJ6KSyXit56QcYZ0CQ==IuOdCEz7ITQC86n6',
-
-    //         }
-    //     });
-
-    //     if (!response.ok) {
-    //         throw new Error('Failed to fetch data'), response.status
-    //     }
-
-    //     let data = await response.json()
-    //     data = data[0]
-    //     console.log(data)
-    //     let result = [{
-    //         "image": await serverCalls.getImage(name),
-    //         "name": data.name as string,
-    //         "habitat": data.characteristics.habitat as string,
-    //         "diet": data.characteristics.diet as string,
-    //         "prey": data.characteristics.prey as string,
-    //         "name_of_young": data.characteristics.name_of_young as string,
-    //         "common_name": data.characteristics.common_name as string,
-    //         "number_of_species": data.characteristics.number_of_species as string,
-    //         "location": data.characteristics.location as string,
-    //         "group": data.characteristics.group as string
-    //     }]
-    //     console.log(result)
-    //       return(result)
-    // },
-    // deleteCollection: async (name:string) => {
-    //     console.log(name)
-    //     const response = await fetch(`https://api.api-ninjas.com/v1/animals?name=${name}`, {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'X-Api-Key': '3lc9yJ6KSyXit56QcYZ0CQ==IuOdCEz7ITQC86n6',
-
-    //         }
-    //     });
-
-    //     if (!response.ok) {
-    //         throw new Error('Failed to fetch data'), response.status
-    //     }
-
-    //     let data = await response.json()
-    //     data = data[0]
-    //     console.log(data)
-    //     let result = [{
-    //         "image": await serverCalls.getImage(name),
-    //         "name": data.name as string,
-    //         "habitat": data.characteristics.habitat as string,
-    //         "diet": data.characteristics.diet as string,
-    //         "prey": data.characteristics.prey as string,
-    //         "name_of_young": data.characteristics.name_of_young as string,
-    //         "common_name": data.characteristics.common_name as string,
-    //         "number_of_species": data.characteristics.number_of_species as string,
-    //         "location": data.characteristics.location as string,
-    //         "group": data.characteristics.group as string
-    //     }]
-    //     console.log(result)
-    //       return(result)
-    // },
+   
     
 };
   

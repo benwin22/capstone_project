@@ -47,6 +47,7 @@ const navStyles = {
         backgroundRepeat: "no-repeat",
         backgroundColor: 'white',
     
+    
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp, //number 
             duration: theme.transitions.duration.leavingScreen //string calculation of the duration
@@ -54,7 +55,8 @@ const navStyles = {
     },
     menuButton: {
         marginRight: theme.spacing(2), //default to 8px * 2 = 16px
-        color: 'theme.transitions.duration.leavingScreen'
+        color: 'theme.transitions.duration.leavingScreen',
+        
     },
   
     // toolbar: {
