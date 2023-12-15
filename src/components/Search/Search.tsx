@@ -267,7 +267,7 @@ export const Search = () => {
                     <Button type='submit'
                      size='medium'
                      variant='outlined'
-                     sx={searchStyles.button}>Submit</Button>
+                     sx={searchStyles.button}>SEARCH</Button>
                 </Box>
                 
             </form>

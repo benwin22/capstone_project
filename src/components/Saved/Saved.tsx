@@ -1,9 +1,9 @@
 import * as _React  from 'react'; 
 import { useState, useEffect } from 'react'; 
 import {
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
+    // Accordion,
+    // AccordionSummary,
+    // AccordionDetails,
     Card,
     CardContent,
     CardMedia,
@@ -13,16 +13,15 @@ import {
     Typography,
     Snackbar,
     Alert } from '@mui/material'
-import InfoIcon from '@mui/icons-material/Info';
 import { getDatabase, ref, onValue, off, remove, update } from 'firebase/database';
 
 // internal imports
 import { NavBar } from '../sharedComponents';
-import { theme } from '../../Theme/themes';
-import { SearchProps } from '../../customHooks';
+// import { theme } from '../../Theme/themes';
+// import { SearchProps } from '../../customHooks';
 import { AnimalProps, searchStyles } from '../Search';
 import { MessageType } from '../Auth'; 
-import { serverCalls } from '../../api';
+import { serverCalls } from '../../api/server';
 // import { Collection } from '../Collection';
 
 

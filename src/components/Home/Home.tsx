@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 import searchBackgroundImage from '../../assets/images/land_sea.jpeg'; 
-import { NavBar, InputText } from '../sharedComponents';
+import { NavBar } from '../sharedComponents';
 
 interface Props {
     title: string
