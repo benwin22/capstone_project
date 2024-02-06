@@ -175,17 +175,17 @@ export const Saved = () => {
                                          sx={{ color: 'charcoal', backgroundColor: 'ivory'  }}>
                                           
                                                 <Typography>NAME: {saved.name}</Typography>
-                                                {/* <Typography>DIET: {saved.diet}</Typography>
+                                                <Typography>DIET: {saved.diet}</Typography>
                                                 <Typography>WHERE THEY LIVE: {saved.location}</Typography>
                                                 <Typography>HABITAT: {saved.habitat}</Typography>
                                                  
                                                 <Typography>PREY: {saved.prey}</Typography>
-                                                <Typography>NAME OF YOUNG: {saved.name_of_young}</Typography> */}
-                                                {/* <Typography>COMMON NAME: {saved.common_name}</Typography> */}
-                                                {/* <Typography>NUMBER OF SPECIES: {saved.number_of_species}</Typography>
+                                                <Typography>NAME OF YOUNG: {saved.name_of_young}</Typography>
+                                                <Typography>COMMON NAME: {saved.common_name}</Typography>
+                                                <Typography>NUMBER OF SPECIES: {saved.number_of_species}</Typography>
                                                 
-                                                <Typography>TYPE OF ANIMAL: {saved.group}</Typography> */}
-                                                {/* I would like the output to look like a card catalog with Typewriter font
+                                                <Typography>TYPE OF ANIMAL: {saved.group}</Typography>
+                                                {/*I would like the output to look like a card catalog with Typewriter font
                                             {/* fontFamily: 'Fira Code, Consolas, Input, DejaVu Sans Mono, JetBrains Mono, and MonoLisa.' */}
 
                                    
